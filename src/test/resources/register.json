@@ -1,0 +1,59 @@
+{
+  "testEmailFormat": {
+    "default": {
+      "uri":"http://localhost:10726/token",
+      "head_params":{
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      "body_params": {
+        "password": "test123",
+        "displayName": "testName"
+      },
+      "expectation":{
+        "status_code": 201,
+        "values":{
+          "password": "test123",
+          "displayName": "testName",
+          "age": null,
+          "gender": null
+        }
+      }
+    },
+    "cases": [
+      {
+        "comment": "normal",
+        "body_params": {
+          "email": "test@test.com"
+        },
+        "expectation": {
+          "values":{
+            "email": "test@test.com"
+          }
+        }
+      },
+      {
+        "comment": "normal:email length:31",
+        "body_params": {
+          "email": "testtesttesttesttestte@test.com"
+        },
+        "expectation": {
+          "values":{
+            "email": "test@test.com"
+          }
+        }
+      },
+      {
+        "comment": "normal:email length:32",
+        "body_params": {
+          "email": "testtesttesttesttesttes@test.com"
+        },
+        "expectation": {
+          "values":{
+            "email": "test@test.com"
+          }
+        }
+      }
+    ]
+  }
+}
